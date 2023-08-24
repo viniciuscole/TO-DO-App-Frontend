@@ -1,0 +1,62 @@
+.listOuterDiv {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.listOuterDiv:hover .icon {
+  visibility: visible;
+}
+
+.listOuterDiv:hover .listInnerDiv {
+  background-color: var(--secondary);
+}
+
+.listInnerDiv {
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 4px 10px;
+}
+
+.listname {
+  width: fit-content;
+  font-size: larger;
+  font-weight: 300;
+  cursor: pointer;
+  margin: 0;
+}
+
+.underlineDiv {
+  background-color: var(--secondary);
+  width: 100%;
+  height: 1px;
+}
+
+.openTasksIcon {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.icon,
+.hidden {
+  visibility: hidden;
+}
+
+.tasksDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.taskDiv {
+  width: 50vw;
+  max-height: 400px;
+  display: flex;
+  overflow-y: auto;
+  justify-content: space-between;
+  align-items: center;
+}

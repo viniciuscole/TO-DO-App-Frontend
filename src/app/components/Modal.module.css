@@ -1,0 +1,146 @@
+.modalConfirmacaoBlur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalConfirmacao {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  background-color: #1f1f1f;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 9px;
+  gap: 20px;
+  width: 40%;
+}
+
+.modalConfirmacao h2 {
+  color: #fff;
+  text-transform: capitalize;
+  padding-left: 30px;
+  margin: 0;
+  text-align: left;
+}
+
+.divUnderline {
+  height: 2px;
+  width: 50px;
+  background-color: var(--blue);
+  border-radius: 5px;
+  margin-left: 30px;
+}
+
+.divTextos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.divTextos h3 {
+  font-weight: 600;
+}
+
+.divBotoes {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.botaoVoltar {
+  color: #fff;
+  background-color: var(--tertiary);
+  padding: 13px 35px;
+  border-radius: 9px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+}
+
+.botaoConfirmar {
+  color: #fff;
+  background-color: var(--tertiary);
+  border: none;
+  padding: 13px 50px;
+  border-radius: 9px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  position: relative;
+}
+
+.botaoConfirmar:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.botaoConfirmar:disabled {
+  cursor: not-allowed;
+}
+
+.botaoVoltar:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.iconeCarregamento {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 1440px) {
+  .modalConfirmacao {
+    width: 70%;
+  }
+}
+
+@media (max-width: 1150px) {
+  .modalConfirmacao {
+    width: 80%;
+  }
+}
+
+@media (max-width: 768px) {
+  .modalConfirmacao {
+    width: 90%;
+  }
+}
+
+@media (max-width: 450px) {
+  .modalConfirmacao {
+    width: 100%;
+  }
+  .divBotoes {
+    gap: 15px;
+  }
+
+  .divTextos p {
+    font-size: 0.8rem;
+  }
+
+  .divTextos h3 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .divTextos {
+    text-align: center;
+  }
+}

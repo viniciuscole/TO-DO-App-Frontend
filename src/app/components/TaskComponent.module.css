@@ -1,0 +1,37 @@
+.taskDiv {
+  width: 100%;
+  display: flex;
+  overflow-wrap: anywhere;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.taskDiv section {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.taskContent p {
+  margin: 0;
+}
+
+.checkbox {
+  background-color: transparent;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--secondary);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.checkbox:hover {
+  background-color: var(--secondary);
+}
+
+.iconTask {
+  visibility: hidden;
+}
+.taskDiv:hover .iconTask {
+  visibility: visible;
+}

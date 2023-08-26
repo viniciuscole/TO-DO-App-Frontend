@@ -4,4 +4,7 @@
   color: white;
   font-family: "Inter", sans-serif;
   --secondary: #a7a7a7;
+  --primary: black;
+  --tertiary: #454545;
+  --blue: blue;
 }

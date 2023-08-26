@@ -1,15 +1,24 @@
+.list {
+  width: 50vw;
+}
+
 .listOuterDiv {
   display: flex;
   gap: 10px;
-  align-items: center;
+  align-items: flex-start;
+  position: relative;
 }
 
 .listOuterDiv:hover .icon {
   visibility: visible;
 }
 
+.listOuterDiv:hover .openTasksIcon {
+  visibility: visible;
+}
+
 .listOuterDiv:hover .listInnerDiv {
-  background-color: var(--secondary);
+  background-color: var(--tertiary);
 }
 
 .listInnerDiv {
@@ -18,6 +27,10 @@
   flex-direction: column;
   position: relative;
   padding: 4px 10px;
+  transition: background-color 0.2s ease-in-out;
+}
+.header {
+  cursor: pointer;
 }
 
 .listname {
@@ -37,26 +50,36 @@
 .openTasksIcon {
   position: absolute;
   right: 5px;
-  top: 50%;
+  top: 16px;
   transform: translateY(-50%);
+  visibility: hidden;
+  transition: visibility 0.2s ease-in-out;
 }
 
 .icon,
 .hidden {
   visibility: hidden;
+  padding-top: 8px;
+  transition: visibility 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .tasksDiv {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  margin-top: 8px;
   gap: 10px;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
-.taskDiv {
-  width: 50vw;
-  max-height: 400px;
-  display: flex;
-  overflow-y: auto;
-  justify-content: space-between;
-  align-items: center;
+.tasksDiv::-webkit-scrollbar {
+  width: 5px;
+  background-color: white;
+  border-radius: 20px;
+}
+.tasksDiv::-webkit-scrollbar-thumb {
+  background-color: var(--blue);
+  border-radius: 20px;
 }

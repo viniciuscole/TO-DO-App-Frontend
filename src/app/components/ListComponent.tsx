@@ -1,66 +1,132 @@
 import styles from "./ListComponent.module.css";
 import List from "@/interface/list";
 import { useState } from "react";
+import api from "@/api/api";
 
 import { AiFillDelete, AiOutlinePlus, AiTwotoneEdit } from "react-icons/ai";
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
+import Task from "@/interface/task";
+import TaskComponent from "./TaskComponent";
+import AddTaskDiv from "./AddTaskDiv";
+import EditableText from "./EditableText";
+import Modal from "./Modal";
 
 interface ListComponentProps {
   list: List;
-  last?: boolean;
+  onEdit: () => void;
 }
 
-export default function ListComponent({
-  list,
-  last = true,
-}: ListComponentProps) {
+export default function ListComponent({ list, onEdit }: ListComponentProps) {
   const [open, setOpen] = useState(false);
-  console.log(list);
+  const [editing, setEditing] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleClick = () => {
     setOpen(!open);
   };
+
+  const handleEditList = async (text: string) => {
+    if (!text) return;
+    setLoading(true);
+    await api
+      .put(`/list/${list._id}`, { list: text })
+      .then((res) => {
+        setLoading(false);
+        onEdit();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleDeleteList = async () => {
+    await api
+      .delete(`/list/${list._id}`)
+      .then((res) => {
+        setModal(false);
+        onEdit();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleAddTask = async (text: string) => {
+    await api
+      .post(`/list/${list._id}/task `, { task: text })
+      .then((res) => {
+        onEdit();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
-    <>
+    <div className={styles.list}>
       <div className={styles.listOuterDiv}>
-        <AiOutlinePlus className={last ? styles.icon : styles.hidden} />
-        <div className={styles.listInnerDiv} onClick={handleClick}>
-          <div className={styles.listname}>
-            {list.list}
-            <div className={styles.underlineDiv} />
-          </div>
-          {open ? (
-            <BiSolidUpArrow
-              className={`${styles.icon} ${styles.openTasksIcon}`}
-            />
-          ) : (
-            <BiSolidDownArrow
-              className={`${styles.icon} ${styles.openTasksIcon}`}
-            />
+        <div className={styles.listInnerDiv}>
+          <section className={styles.header} onClick={handleClick}>
+            <div className={styles.listname}>
+              <EditableText
+                onChange={(text) => {
+                  console.log(text);
+                  handleEditList(text);
+                }}
+                text={list.list}
+                editing={editing}
+                setEditing={setEditing}
+              />
+              <div className={styles.underlineDiv} />
+            </div>
+            {open ? (
+              <BiSolidUpArrow className={styles.openTasksIcon} />
+            ) : (
+              <BiSolidDownArrow className={styles.openTasksIcon} />
+            )}
+          </section>
+          {open && (
+            <div className={styles.tasksDiv}>
+              {list.tasks.map((task) => {
+                return (
+                  <TaskComponent
+                    task={task}
+                    list={list}
+                    onEdit={() => {
+                      onEdit();
+                    }}
+                  />
+                );
+              })}
+              <AddTaskDiv
+                handleAdd={handleAddTask}
+                placeholder="Adicione uma tarefa"
+              />
+            </div>
           )}
         </div>
-        <AiTwotoneEdit className={styles.icon} />
-        <AiFillDelete className={styles.icon} />
+
+        <AiTwotoneEdit
+          className={styles.icon}
+          onClick={() => {
+            setEditing(true);
+          }}
+        />
+        <AiFillDelete
+          className={styles.icon}
+          onClick={() => {
+            setModal(true);
+          }}
+        />
       </div>
-      {open && (
-        <div className={styles.tasksDiv}>
-          {list.tasks.map((task) => {
-            return (
-              <div className={styles.taskDiv}>
-                <section>
-                  <div className={styles.checkbox} />
-                  <div className={styles.taskName}>{task.task}</div>
-                  <p> - criado em {task.date.toString()}</p>
-                </section>
-                <section>
-                  <AiTwotoneEdit className={styles.iconTask} />
-                  <AiFillDelete className={styles.iconTask} />
-                </section>
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </>
+      <Modal
+        aviso="Tem certeza que deseja excluir esta tarefa?"
+        onClickBotao={handleDeleteList}
+        setConfirmacaoVisivel={setModal}
+        visivel={modal}
+        loadingBotao={loading}
+      />
+    </div>
   );
 }

@@ -82,7 +82,6 @@ export default function TaskComponent({
         />
         <EditableText
           onChange={(text) => {
-            console.log(text);
             handleEditTask(text);
           }}
           text={task.task}
@@ -90,7 +89,7 @@ export default function TaskComponent({
           setEditing={setEditing}
         />
       </section>
-      <section>
+      <section className={styles.icons}>
         <AiTwotoneEdit
           className={styles.iconTask}
           onClick={() => {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./EditableText.module.css";
 
 interface EditableTextProps {
@@ -18,6 +18,11 @@ export default function EditableText({
   setEditing,
 }: EditableTextProps) {
   const [value, setValue] = useState(text);
+
+  useEffect(() => {
+    setValue(text);
+  }, [text]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
@@ -33,6 +38,7 @@ export default function EditableText({
           onBlur={() => {
             setEditing(false);
             onChange(value);
+            setValue(text);
           }}
         />
       ) : (

@@ -1,22 +1,20 @@
-import List from "@/interface/list";
 import { AiOutlinePlus } from "react-icons/ai";
 
-import styles from "./AddTaskDiv.module.css";
+import styles from "./AddDiv.module.css";
 import EditableText from "./EditableText";
 import { useState } from "react";
-import api from "@/api/api";
 
 interface AddDivProps {
   handleAdd: (text: string) => void;
   placeholder: string;
 }
 
-export default function AddTaskDiv({ handleAdd, placeholder }: AddDivProps) {
+export default function AddDiv({ handleAdd, placeholder }: AddDivProps) {
   const [editing, setEditing] = useState(false);
 
   return (
-    <div className={styles.addTaskDiv}>
-      <section className={styles.addTaskContent}>
+    <div className={styles.addDiv}>
+      <section className={styles.addContent}>
         <AiOutlinePlus
           onClick={() => {
             setEditing(true);

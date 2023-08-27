@@ -19,7 +19,7 @@
   z-index: 100;
   transform: translate(-50%, -50%);
   overflow: auto;
-  background-color: #1f1f1f;
+  background-color: var(--modalbg);
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -29,7 +29,7 @@
 }
 
 .modalConfirmacao h2 {
-  color: #fff;
+  color: var(--inverse);
   text-transform: capitalize;
   padding-left: 30px;
   margin: 0;
@@ -39,7 +39,7 @@
 .divUnderline {
   height: 2px;
   width: 50px;
-  background-color: var(--blue);
+  background-color: var(--q);
   border-radius: 5px;
   margin-left: 30px;
 }
@@ -61,7 +61,7 @@
 }
 
 .botaoVoltar {
-  color: #fff;
+  color: var(--inverse);
   background-color: var(--tertiary);
   padding: 13px 35px;
   border-radius: 9px;
@@ -71,7 +71,7 @@
 }
 
 .botaoConfirmar {
-  color: #fff;
+  color: var(--inverse);
   background-color: var(--tertiary);
   border: none;
   padding: 13px 50px;
@@ -120,6 +120,9 @@
   .modalConfirmacao {
     width: 90%;
   }
+  .botaoConfirmar .botaoVoltar {
+    padding: 13px 20px;
+  }
 }
 
 @media (max-width: 450px) {
@@ -127,7 +130,7 @@
     width: 100%;
   }
   .divBotoes {
-    gap: 15px;
+    gap: 10px;
   }
 
   .divTextos p {

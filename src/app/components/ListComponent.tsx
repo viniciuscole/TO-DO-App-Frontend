@@ -7,7 +7,7 @@ import { AiFillDelete, AiOutlinePlus, AiTwotoneEdit } from "react-icons/ai";
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 import Task from "@/interface/task";
 import TaskComponent from "./TaskComponent";
-import AddTaskDiv from "./AddTaskDiv";
+import AddTaskDiv from "./AddDiv";
 import EditableText from "./EditableText";
 import Modal from "./Modal";
 
@@ -41,10 +41,12 @@ export default function ListComponent({ list, onEdit }: ListComponentProps) {
   };
 
   const handleDeleteList = async () => {
+    setLoading(true);
     await api
       .delete(`/list/${list._id}`)
       .then((res) => {
         setModal(false);
+        setLoading(false);
         onEdit();
       })
       .catch((err) => {
@@ -71,7 +73,6 @@ export default function ListComponent({ list, onEdit }: ListComponentProps) {
             <div className={styles.listname}>
               <EditableText
                 onChange={(text) => {
-                  console.log(text);
                   handleEditList(text);
                 }}
                 text={list.list}

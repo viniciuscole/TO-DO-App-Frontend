@@ -6,14 +6,14 @@ import { useEffect } from "react";
 import { useState } from "react";
 import List from "@/interface/list";
 import ListComponent from "./components/ListComponent";
-import AddTaskDiv from "./components/AddTaskDiv";
+import AddTaskDiv from "./components/AddDiv";
 
 export default function Home() {
   const [data, setData] = useState<List[]>([]);
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
   const getLists = async () => {
     api.get("/").then((res) => {
       setData(res.data);
-      console.log(res.data);
     });
   };
 

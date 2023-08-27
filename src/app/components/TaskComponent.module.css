@@ -6,7 +6,8 @@
   align-items: center;
 }
 
-.taskDiv section {
+.icons,
+.taskContent {
   display: flex;
   gap: 10px;
   align-items: center;
